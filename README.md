@@ -65,6 +65,8 @@ git clone https://hf-mirror.com/liuhaotian/llava-v1.6-vicuna-13b
 git clone https://github.com/EasonAI-5589/eval.git
 ```
 
+
+test
 下载数据集并且修改文件路径
 
 # 运行Evaluation
