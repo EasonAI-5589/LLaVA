@@ -17,6 +17,7 @@ cd LLaVA
 conda create -n llava python=3.10 -y
 # reset terminal
 source ~/.bashrc
+conda init bash
 ```
 在完成环境创建过后，关闭当前终端，并新建终端，进行下一步
 
