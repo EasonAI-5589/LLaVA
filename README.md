@@ -65,6 +65,18 @@ git clone https://hf-mirror.com/liuhaotian/llava-v1.6-vicuna-13b
 git clone https://github.com/EasonAI-5589/eval.git
 ```
 
+# 运行示例
+首次运行的时候，使用huggingface镜像源替换掉原始huggingface, 用于拉取CLIP权重
+```bash
+export HF_ENDPOINT=https://hf-mirror.com
+```
+随后进行图文对话
+```bash
+python -m llava.serve.cli \
+    --model-path /root/autodl-tmp/llava-v1.5-7b \
+    --image-file /root/autodl-tmp/LLaVA/images/llava_logo.png\
+    --load-4bit
+```
 
 test
 下载数据集并且修改文件路径
@@ -76,3 +88,27 @@ export HF_ENDPOINT=https://hf-mirror.com
 ```
 
 运行eval脚本
+
+```bash
+
+cd /root/autodl-tmp/LLaVA
+
+python -m llava.eval.model_vqa_loader \
+    --model-path /root/autodl-tmp/llava-v1.5-7b \
+    --question-file /root/autodl-tmp/eval/MME/llava_mme_test.jsonl \
+    --image-folder /root/autodl-tmp/eval/MME/MME_Benchmark_release_version \
+    --answers-file /root/autodl-tmp/eval/MME/answers/llava-v1.5-7b.jsonl \
+    --temperature 0 \
+    --conv-mode vicuna_v1
+
+
+cd /root/autodl-tmp/eval/MME
+
+python convert_answer_to_mme.py --experiment llava-v1.5-7b
+
+cd eval_tool
+
+python calculation.py --results_dir answers/llava-v1.5-7b
+
+cd /root/autodl-tmp/LLaVA
+```
